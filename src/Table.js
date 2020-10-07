@@ -1,5 +1,5 @@
-import React from 'react'
-import './Table.css'
+import React from 'react';
+import './Table.css';
 
 const Table = ({countries}) => {
     return (
@@ -12,7 +12,7 @@ const Table = ({countries}) => {
                 </tr>
             ))}
         </div>
-    )
+    );
 }
 
-export default Table
+export default Table;

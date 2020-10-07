@@ -3,6 +3,8 @@ import {MenuItem,FormControl,Select,Card , CardContent} from "@material-ui/core"
 import InfoBox from './InfoBox';
 import Table from './Table';
 import Map from './Map';
+import {sortData} from './util.js'
+import LineGraph from './LineGraph';
 
 import './App.css';
 
@@ -24,14 +26,15 @@ function App() {
   
   useEffect(() => {
     const getCountriesData = async () => {
-       await fetch("https://disease.sh/v3/covid-19/countries")
+       fetch("https://disease.sh/v3/covid-19/countries")
       .then((response) => response.json()) 
-      .then(data => {
+      .then((data) => {
         const countries = data.map((country)=>({
             name:country.country,
             value:country.countryInfo.iso2
           }))
-          setTableData(data);
+          let sortedData = sortData(data);
+          setTableData(sortedData);
           setCountries(countries);  
       })     
     
@@ -87,7 +90,7 @@ function App() {
   <h3>Livecases by Country</h3>
      <Table countries={tableData} />
   <h3>WorldWide New Cases</h3>
-  
+  <LineGraph />
   </CardContent>
   
   </Card>
